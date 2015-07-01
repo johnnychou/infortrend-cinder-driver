@@ -237,12 +237,14 @@ class InfortrendCommon(object):
             if pool['Name'] in self.pool_list:
                 is_tier_pool = False
                 tier_pools = []
+                dest_pool_name = ''
                 for entry in lv_info:
                     if entry['LV-ID'] == pool['ID']:
                         is_tier_pool = True
+                        dest_pool_name = entry['LV-Name']
                         tier_pools.append(entry['Tier'])
                 if is_tier_pool:
-                    self.tier_pools_dict[entry['LV-Name']] = tier_pools
+                    self.tier_pools_dict[dest_pool_name] = tier_pools
 
     def _init_channel_list(self):
         self.channel_list = {
