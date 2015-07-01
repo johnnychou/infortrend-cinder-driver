@@ -242,7 +242,7 @@ class InfortrendCommon(object):
                     if entry['LV-ID'] == pool['ID']:
                         is_tier_pool = True
                         dest_pool_name = entry['LV-Name']
-                        tier_pools.append(entry['Tier'])
+                        tier_pools.append(int(entry['Tier'])))
                 if is_tier_pool:
                     self.tier_pools_dict[dest_pool_name] = tier_pools
 
@@ -652,6 +652,7 @@ class InfortrendCommon(object):
         if self.TIERING_NUM_KEY in extraspecs.keys():
             tiering_num = extraspecs[self.TIERING_NUM_KEY].lower()
             tier_levels_list = list(range(int(tiering_num)))
+            tier_levels_list = list(map(str, tier_levels_list))
             self._check_tiering_existing(tier_levels_list, pool_id)
 
     def _select_most_free_capacity_pool_id(self, lv_info, extraspecs=None):
@@ -674,9 +675,11 @@ class InfortrendCommon(object):
                     lv_info.remove(lv)
 
         if tiering_num or tiering_str:
+            tier_level = self._get_tier_level(self, tiering_num, tiering_str)
             for lv in lv_info:
                 LOG.info(_LI('Loop Tier %(tier)s'), {'tier': lv['Name']})
-                if lv['Name'] in self.tier_pools_dict.keys():
+                if (lv['Name'] in self.tier_pools_dict.keys() and
+                    tier_level >= (max(tier_pools_dict[lv['Name']])+1)):
                     available_space = float(lv['Available'].split(' ', 1)[0])
                     free_capacity_gb = round(mi_to_gi(available_space))
                     if free_capacity_gb > largest_free_capacity_gb:
@@ -693,6 +696,14 @@ class InfortrendCommon(object):
                     largest_free_capacity_gb = free_capacity_gb
                     dest_pool_id = lv['ID']
         return dest_pool_id
+
+    def _get_tier_level(self, tiering_num, tiering_str):
+        tier_level = int(tiering_num)
+        tiers = tiering_str.split(',')
+        for tier in tiers:
+            if((int(tier)+1) > tier_level):
+                tier_level = int(tier)+1
+        return tier_level
 
     def _get_target_pool_id(self, volume):
         extraspecs = self._get_extraspecs_dict(volume['volume_type_id'])
