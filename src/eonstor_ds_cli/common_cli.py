@@ -664,6 +664,9 @@ class InfortrendCommon(object):
         if self.TIERING_SET_KEY in extraspecs.keys():
             tiering_str = extraspecs[self.TIERING_SET_KEY].lower()
 
+        LOG.info(_LI('tier_pools %(tier_pools)s'), {
+            'tier_pools': self.tier_pools_dict.keys()})
+
         if not (tiering_num or tiering_str):
             for lv in lv_info:
                 if lv['Name'] in self.tier_pools_dict.keys():
