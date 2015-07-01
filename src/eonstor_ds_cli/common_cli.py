@@ -665,7 +665,7 @@ class InfortrendCommon(object):
         if not (tiering_num or tiering_str):
             for lv in lv_info:
                 if lv['Name'] in self.tier_pools_dict.keys():
-                    lv_info.remove[lv]
+                    lv_info.remove(lv)
 
         if tiering_num or tiering_str:
             for lv in lv_info:
