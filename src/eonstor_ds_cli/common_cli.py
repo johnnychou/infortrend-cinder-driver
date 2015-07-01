@@ -242,7 +242,7 @@ class InfortrendCommon(object):
                     if entry['LV-ID'] == pool['ID']:
                         is_tier_pool = True
                         dest_pool_name = entry['LV-Name']
-                        tier_pools.append(int(entry['Tier'])))
+                        tier_pools.append(int(entry['Tier']))
                 if is_tier_pool:
                     self.tier_pools_dict[dest_pool_name] = tier_pools
 
@@ -503,7 +503,8 @@ class InfortrendCommon(object):
         else:
             tiering = self._get_extraspecs_value(
                 extraspecs, self.TIERING_SET_KEY)
-            if provisioning == 'full':
+            if (provisioning == 'full' and
+                    self.PROVISIONING_KEY in extraspecs.keys()):
                 if tiering != '-1':
                     extraspecs_dict['tiering'] = tiering
                 else:
@@ -679,7 +680,8 @@ class InfortrendCommon(object):
             for lv in lv_info:
                 LOG.info(_LI('Loop Tier %(tier)s'), {'tier': lv['Name']})
                 if (lv['Name'] in self.tier_pools_dict.keys() and
-                    tier_level >= (max(tier_pools_dict[lv['Name']])+1)):
+                        tier_level >= (max(
+                            self.tier_pools_dict[lv['Name']])+1)):
                     available_space = float(lv['Available'].split(' ', 1)[0])
                     free_capacity_gb = round(mi_to_gi(available_space))
                     if free_capacity_gb > largest_free_capacity_gb:
