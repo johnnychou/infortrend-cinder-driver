@@ -1970,3 +1970,6 @@ class InfortrendiSCSICommonTestCase(InfortrendTestCase):
             None,
             src_volume,
             dst_volume)
+
+    def test_select_most_free_capacity_pool_id(self):
+        pass

@@ -668,7 +668,7 @@ class InfortrendCommon(object):
             'tier_pools': self.tier_pools_dict.keys()})
 
         if not (tiering_num or tiering_str):
-            for lv in lv_info:
+            for lv in lv_info[:]:
                 if lv['Name'] in self.tier_pools_dict.keys():
                     LOG.info(_LI('Del Tier %(tier)s'), {'tier': lv['Name']})
                     lv_info.remove(lv)
