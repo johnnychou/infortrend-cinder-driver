@@ -44,11 +44,12 @@ class InfortrendTestCase(test.TestCase):
     def _fake_safe_get(self, key):
         return getattr(self.configuration, key)
 
-    def _driver_setup(self, mock_commands, configuration=None):
+    def _driver_setup(self, mock_commands, configuration=None, do_setup=None):
         if configuration is None:
             configuration = self.configuration
         self.driver = self._get_driver(configuration)
-        mock_commands['ShowLV'] = self._mock_show_lv
+        if not do_setup:
+            mock_commands['ShowLV'] = self._mock_show_lv
 
         mock_commands_execute = self._mock_command_execute(mock_commands)
         mock_cli = mock.Mock(side_effect=mock_commands_execute)
@@ -81,6 +82,11 @@ class InfortrendTestCase(test.TestCase):
         if 'tier' in args:
             return self.cli_data.get_test_show_lv_tier()
         return self.cli_data.get_test_show_lv()
+
+    def _mock_show_lv_for_do_setup(self, *args, **kwargs):
+        if 'tier' in args:
+            return self.cli_data.get_test_show_lv_tier_for_do_setup()
+        return self.cli_data.get_test_show_lv_for_do_setup()
 
     def _assert_cli_has_calls(self, expect_cli_cmd):
         self.driver._execute_command.assert_has_calls(expect_cli_cmd)
@@ -1970,6 +1976,20 @@ class InfortrendiSCSICommonTestCase(InfortrendTestCase):
             None,
             src_volume,
             dst_volume)
+
+    def test_do_setup_init_pool_list(self):
+        test_tier_pools_dict = {
+            'LV-1': [0],
+            'LV-2': [0, 1],
+            'LV-3': [0, 1, 2],
+            'LV-4': [0, 1, 2, 3],
+        }
+        mock_commands = {
+            'ShowLV': self._mock_show_lv_for_do_setup,
+        }
+        self._driver_setup(mock_commands, None, True)
+        self.driver.do_setup(None)
+        self.assertDictMatch(self.driver.tier_pools_dict, test_tier_pools_dict)
 
     def test_select_most_free_capacity_pool_id(self):
         pass

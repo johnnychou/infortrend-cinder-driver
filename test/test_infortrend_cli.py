@@ -24,7 +24,8 @@ class InfortrendCLITestData(object):
     """CLI Test Data."""
 
     # Infortrend entry
-    fake_lv_id = ['5DE94FF775D81C30', '1234567890']
+    fake_lv_id = ['5DE94FF775D81C30', '1234567890', '0987654321',
+                  '12121212121212', '3434343434343434']
 
     fake_partition_id = ['6A41315B0EDC8EB7', '51B4283E4E159173',
                          '987654321', '123456789',
@@ -1159,6 +1160,49 @@ Return: 0x0000
             'Status': 'On-line',
         }])
 
+    def get_test_show_lv_for_do_setup(self):
+        return (0, [{
+            'Name': 'LV-0',
+            'LD-amount': '1',
+            'Available': '841978 MB',
+            'ID': self.fake_lv_id[0],
+            'Progress': '---',
+            'Size': '857982 MB',
+            'Status': 'On-line',
+        }, {
+            'Name': 'LV-1',
+            'LD-amount': '1',
+            'Available': '841978 MB',
+            'ID': self.fake_lv_id[1],
+            'Progress': '---',
+            'Size': '857982 MB',
+            'Status': 'On-line',
+        }, {
+            'Name': 'LV-2',
+            'LD-amount': '1',
+            'Available': '841978 MB',
+            'ID': self.fake_lv_id[2],
+            'Progress': '---',
+            'Size': '857982 MB',
+            'Status': 'On-line',
+        }, {
+            'Name': 'LV-3',
+            'LD-amount': '1',
+            'Available': '841978 MB',
+            'ID': self.fake_lv_id[3],
+            'Progress': '---',
+            'Size': '857982 MB',
+            'Status': 'On-line',
+        }, {
+            'Name': 'LV-4',
+            'LD-amount': '1',
+            'Available': '841978 MB',
+            'ID': self.fake_lv_id[4],
+            'Progress': '---',
+            'Size': '857982 MB',
+            'Status': 'On-line',
+        }])
+
     def get_fake_show_lv(self):
         msg = """
 CLI: Successful: Device(UID:77124, Name:, Model:DS S12F-G2852-6) selected.
@@ -1237,6 +1281,89 @@ Return: 0x0000
         }, {
             'LV-Name': 'TierLV',
             'LV-ID': self.fake_lv_id[0],
+            'Tier': '3',
+            'Size': '931.02 GB',
+            'Used': '0 MB(0.0%)',
+            'Data Service': '0 MB(0.0%)',
+            'Reserved Ratio': '0.0%',
+        }])
+
+    def get_test_show_lv_tier_for_do_setup(self):
+        return (0, [{
+            'LV-Name': 'LV-1',
+            'LV-ID': self.fake_lv_id[1],
+            'Tier': '0',
+            'Size': '418.93 GB',
+            'Used': '10 GB(2.4%)',
+            'Data Service': '0 MB(0.0%)',
+            'Reserved Ratio': '10.0%',
+        }, {
+            'LV-Name': 'LV-2',
+            'LV-ID': self.fake_lv_id[2],
+            'Tier': '0',
+            'Size': '931.02 GB',
+            'Used': '0 MB(0.0%)',
+            'Data Service': '0 MB(0.0%)',
+            'Reserved Ratio': '0.0%',
+        }, {
+            'LV-Name': 'LV-2',
+            'LV-ID': self.fake_lv_id[2],
+            'Tier': '1',
+            'Size': '931.02 GB',
+            'Used': '0 MB(0.0%)',
+            'Data Service': '0 MB(0.0%)',
+            'Reserved Ratio': '0.0%',
+        }, {
+            'LV-Name': 'LV-3',
+            'LV-ID': self.fake_lv_id[3],
+            'Tier': '0',
+            'Size': '931.02 GB',
+            'Used': '0 MB(0.0%)',
+            'Data Service': '0 MB(0.0%)',
+            'Reserved Ratio': '0.0%',
+        }, {
+            'LV-Name': 'LV-3',
+            'LV-ID': self.fake_lv_id[3],
+            'Tier': '1',
+            'Size': '931.02 GB',
+            'Used': '0 MB(0.0%)',
+            'Data Service': '0 MB(0.0%)',
+            'Reserved Ratio': '0.0%',
+        }, {
+            'LV-Name': 'LV-3',
+            'LV-ID': self.fake_lv_id[3],
+            'Tier': '2',
+            'Size': '931.02 GB',
+            'Used': '0 MB(0.0%)',
+            'Data Service': '0 MB(0.0%)',
+            'Reserved Ratio': '0.0%',
+        }, {
+            'LV-Name': 'LV-4',
+            'LV-ID': self.fake_lv_id[4],
+            'Tier': '0',
+            'Size': '931.02 GB',
+            'Used': '0 MB(0.0%)',
+            'Data Service': '0 MB(0.0%)',
+            'Reserved Ratio': '0.0%',
+        }, {
+            'LV-Name': 'LV-4',
+            'LV-ID': self.fake_lv_id[4],
+            'Tier': '1',
+            'Size': '931.02 GB',
+            'Used': '0 MB(0.0%)',
+            'Data Service': '0 MB(0.0%)',
+            'Reserved Ratio': '0.0%',
+        }, {
+            'LV-Name': 'LV-4',
+            'LV-ID': self.fake_lv_id[4],
+            'Tier': '2',
+            'Size': '931.02 GB',
+            'Used': '0 MB(0.0%)',
+            'Data Service': '0 MB(0.0%)',
+            'Reserved Ratio': '0.0%',
+        }, {
+            'LV-Name': 'LV-4',
+            'LV-ID': self.fake_lv_id[4],
             'Tier': '3',
             'Size': '931.02 GB',
             'Used': '0 MB(0.0%)',
