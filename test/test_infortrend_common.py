@@ -1984,6 +1984,8 @@ class InfortrendiSCSICommonTestCase(InfortrendTestCase):
             'LV-3': [0, 1, 2],
             'LV-4': [0, 1, 2, 3],
         }
+        configuration = copy.copy(self.configuration)
+        configuration.infortrend_pools_name = 'LV-1, LV-2, LV-3, LV-4'
         mock_commands = {
             'ShowLV': self._mock_show_lv_for_do_setup,
         }
