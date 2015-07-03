@@ -2010,7 +2010,20 @@ class InfortrendiSCSICommonTestCase(InfortrendTestCase):
         self.assertEqual(dest_pool_id, test_pool_id)
 
     def test_select_most_free_capacity_pool_id_with_tiering_str(self):
-        pass
+        test_pool_id = self.cli_data.fake_lv_id[4]
+        rc, test_lv_info = self.cli_data.get_test_show_lv_for_do_setup()
+        test_extraspecs = {'infortrend:tiering': '0,3'}
+        configuration = copy.copy(self.configuration)
+        configuration.infortrend_pools_name = 'LV-0, LV-1, LV-2, LV-3, LV-4'
+        mock_commands = {
+            'ShowLV': self._mock_show_lv_for_do_setup,
+        }
+        self._driver_setup(mock_commands, configuration, True)
+        self.driver.do_setup(None)
+        dest_pool_id = self.driver._select_most_free_capacity_pool_id(
+                                            test_lv_info, test_extraspecs)
+
+        self.assertEqual(dest_pool_id, test_pool_id)
 
     def test_select_most_free_capacity_pool_id_with_both_tiering_setting(self):
         pass
