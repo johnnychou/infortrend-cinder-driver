@@ -2004,10 +2004,10 @@ class InfortrendiSCSICommonTestCase(InfortrendTestCase):
         }
         self._driver_setup(mock_commands, configuration, True)
         self.driver.do_setup(None)
-        self.driver._select_most_free_capacity_pool_id(test_lv_info,
-                                                       test_extraspecs)
+        dest_pool_id = self.driver._select_most_free_capacity_pool_id(
+                                            test_lv_info, test_extraspecs)
 
-        self.assertEqual(self.driver.dest_pool_id, test_pool_id)
+        self.assertEqual(dest_pool_id, test_pool_id)
 
     def test_select_most_free_capacity_pool_id_with_tiering_str(self):
         pass
