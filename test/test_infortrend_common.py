@@ -2004,4 +2004,3 @@ class InfortrendiSCSICommonTestCase(InfortrendTestCase):
 
     def test_select_most_free_capacity_pool_id_without_tiering_setting(self):
         pass
-
