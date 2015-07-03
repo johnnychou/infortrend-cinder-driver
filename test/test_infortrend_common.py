@@ -1985,7 +1985,7 @@ class InfortrendiSCSICommonTestCase(InfortrendTestCase):
             'LV-4': [0, 1, 2, 3],
         }
         configuration = copy.copy(self.configuration)
-        configuration.infortrend_pools_name = 'LV-1, LV-2, LV-3, LV-4'
+        configuration.infortrend_pools_name = 'LV-0, LV-1, LV-2, LV-3, LV-4'
         mock_commands = {
             'ShowLV': self._mock_show_lv_for_do_setup,
         }
@@ -1993,5 +1993,15 @@ class InfortrendiSCSICommonTestCase(InfortrendTestCase):
         self.driver.do_setup(None)
         self.assertDictMatch(self.driver.tier_pools_dict, test_tier_pools_dict)
 
-    def test_select_most_free_capacity_pool_id(self):
+    def test_select_most_free_capacity_pool_id_with_tiering_num(self):
         pass
+
+    def test_select_most_free_capacity_pool_id_with_tiering_str(self):
+        pass
+
+    def test_select_most_free_capacity_pool_id_with_both_tiering_setting(self):
+        pass
+
+    def test_select_most_free_capacity_pool_id_without_tiering_setting(self):
+        pass
+

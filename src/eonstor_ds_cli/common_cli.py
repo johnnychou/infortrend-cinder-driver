@@ -682,7 +682,7 @@ class InfortrendCommon(object):
                 # LOG.info(_LI('Loop Tier %(tier)s'), {'tier': lv['Name']})
                 if (lv['Name'] in self.tier_pools_dict.keys() and
                         tier_level >= (max(
-                            self.tier_pools_dict[lv['Name']])+1)):
+                            self.tier_pools_dict[lv['Name']]) + 1)):
                     available_space = float(lv['Available'].split(' ', 1)[0])
                     free_capacity_gb = round(mi_to_gi(available_space))
                     if free_capacity_gb > largest_free_capacity_gb:
@@ -704,8 +704,8 @@ class InfortrendCommon(object):
         tier_level = int(tiering_num)
         tiers = tiering_str.split(',')
         for tier in tiers:
-            if((int(tier)+1) > tier_level):
-                tier_level = int(tier)+1
+            if((int(tier) + 1) > tier_level):
+                tier_level = int(tier) + 1
         return tier_level
 
     def _get_target_pool_id(self, volume):
