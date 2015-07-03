@@ -703,12 +703,12 @@ class InfortrendCommon(object):
         return dest_pool_id
 
     def _get_tier_level(self, tiering_num, tiering_str):
-        if not tiering_num:
+        if tiering_num:
             tier_level = int(tiering_num)
         else:
             tier_level = 0
 
-        if not tiering_str:
+        if tiering_str:
             tiers = tiering_str.split(',')
             for tier in tiers:
                 if((int(tier) + 1) > tier_level):
