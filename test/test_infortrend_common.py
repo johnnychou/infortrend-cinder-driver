@@ -1996,7 +1996,7 @@ class InfortrendiSCSICommonTestCase(InfortrendTestCase):
     def test_select_most_free_capacity_pool_id_with_tiering_num(self):
         test_pool_id = self.cli_data.fake_lv_id[4]
         rc, test_lv_info = self.cli_data.get_test_show_lv_for_do_setup()
-        test_extraspecs = {'TIERING_NUM_KEY': '2'}
+        test_extraspecs = {'infortrend_tiering': '2'}
         configuration = copy.copy(self.configuration)
         configuration.infortrend_pools_name = 'LV-0, LV-1, LV-2, LV-3, LV-4'
         mock_commands = {

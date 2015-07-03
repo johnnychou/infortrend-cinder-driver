@@ -1172,7 +1172,7 @@ Return: 0x0000
         }, {
             'Name': 'LV-1',
             'LD-amount': '1',
-            'Available': '841978 MB',
+            'Available': '941978 MB',
             'ID': self.fake_lv_id[1],
             'Progress': '---',
             'Size': '857982 MB',
@@ -1180,7 +1180,7 @@ Return: 0x0000
         }, {
             'Name': 'LV-2',
             'LD-amount': '1',
-            'Available': '841978 MB',
+            'Available': '1041978 MB',
             'ID': self.fake_lv_id[2],
             'Progress': '---',
             'Size': '857982 MB',
@@ -1188,7 +1188,7 @@ Return: 0x0000
         }, {
             'Name': 'LV-3',
             'LD-amount': '1',
-            'Available': '841978 MB',
+            'Available': '1141978 MB',
             'ID': self.fake_lv_id[3],
             'Progress': '---',
             'Size': '857982 MB',
@@ -1196,7 +1196,7 @@ Return: 0x0000
         }, {
             'Name': 'LV-4',
             'LD-amount': '1',
-            'Available': '841978 MB',
+            'Available': '1241978 MB',
             'ID': self.fake_lv_id[4],
             'Progress': '---',
             'Size': '857982 MB',
