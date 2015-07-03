@@ -667,19 +667,19 @@ class InfortrendCommon(object):
         if self.TIERING_SET_KEY in extraspecs.keys():
             tiering_str = extraspecs[self.TIERING_SET_KEY].lower()
 
-        LOG.info(_LI('tier_pools %(tier_pools)s'), {
-            'tier_pools': self.tier_pools_dict.keys()})
+        # LOG.info(_LI('tier_pools %(tier_pools)s'), {
+        #    'tier_pools': self.tier_pools_dict.keys()})
 
         if not (tiering_num or tiering_str):
             for lv in lv_info[:]:
                 if lv['Name'] in self.tier_pools_dict.keys():
-                    LOG.info(_LI('Del Tier %(tier)s'), {'tier': lv['Name']})
+                    # LOG.info(_LI('Del Tier %(tier)s'), {'tier': lv['Name']})
                     lv_info.remove(lv)
 
         if tiering_num or tiering_str:
             tier_level = self._get_tier_level(self, tiering_num, tiering_str)
             for lv in lv_info:
-                LOG.info(_LI('Loop Tier %(tier)s'), {'tier': lv['Name']})
+                # LOG.info(_LI('Loop Tier %(tier)s'), {'tier': lv['Name']})
                 if (lv['Name'] in self.tier_pools_dict.keys() and
                         tier_level >= (max(
                             self.tier_pools_dict[lv['Name']])+1)):
@@ -692,7 +692,7 @@ class InfortrendCommon(object):
 
         for lv in lv_info:
             if lv['Name'] in self.pool_list:
-                LOG.info(_LI('Sel Pool %(tier)s'), {'tier': lv['Name']})
+                # LOG.info(_LI('Sel Pool %(tier)s'), {'tier': lv['Name']})
                 available_space = float(lv['Available'].split(' ', 1)[0])
                 free_capacity_gb = round(mi_to_gi(available_space))
                 if free_capacity_gb > largest_free_capacity_gb:
