@@ -677,8 +677,6 @@ class InfortrendCommon(object):
                     lv_info.remove(lv)
 
         if tiering_num or tiering_str:
-            print(tiering_num)
-            print(tiering_str)
             tier_level = self._get_tier_level(tiering_num, tiering_str)
             for lv in lv_info:
                 # LOG.info(_LI('Loop Tier %(tier)s'), {'tier': lv['Name']})

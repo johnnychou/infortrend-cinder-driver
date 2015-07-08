@@ -2005,7 +2005,7 @@ class InfortrendiSCSICommonTestCase(InfortrendTestCase):
         self._driver_setup(mock_commands, configuration, True)
         self.driver.do_setup(None)
         dest_pool_id = self.driver._select_most_free_capacity_pool_id(
-                                            test_lv_info, test_extraspecs)
+            test_lv_info, test_extraspecs)
 
         self.assertEqual(dest_pool_id, test_pool_id)
 
@@ -2021,7 +2021,7 @@ class InfortrendiSCSICommonTestCase(InfortrendTestCase):
         self._driver_setup(mock_commands, configuration, True)
         self.driver.do_setup(None)
         dest_pool_id = self.driver._select_most_free_capacity_pool_id(
-                                            test_lv_info, test_extraspecs)
+            test_lv_info, test_extraspecs)
 
         self.assertEqual(dest_pool_id, test_pool_id)
 
@@ -2038,7 +2038,7 @@ class InfortrendiSCSICommonTestCase(InfortrendTestCase):
         self._driver_setup(mock_commands, configuration, True)
         self.driver.do_setup(None)
         dest_pool_id = self.driver._select_most_free_capacity_pool_id(
-                                            test_lv_info, test_extraspecs)
+            test_lv_info, test_extraspecs)
 
         self.assertEqual(dest_pool_id, test_pool_id)
 
