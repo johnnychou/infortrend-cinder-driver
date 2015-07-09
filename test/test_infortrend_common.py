@@ -2062,11 +2062,13 @@ class InfortrendiSCSICommonTestCase(InfortrendTestCase):
         test_volume = self.cli_data.test_volume
         test_pool_id = self.cli_data.fake_lv_id[0]
         test_extraspecs = {'infortrend:provisioning': 'thin'}
+        configuration = copy.copy(self.configuration)
+        configuration.infortrend_pools_name = 'LV-0, LV-1, LV-2, LV-3, LV-4'
         mock_commands = {
             'CreatePartition': SUCCEED,
             'ShowLV': self._mock_show_lv_for_do_setup,
         }
-        self._driver_setup(mock_commands)
+        self._driver_setup(mock_commands, configuration, True)
         self.driver._create_partition_with_pool(test_volume,
                                                 test_pool_id,
                                                 test_extraspecs)
@@ -2101,6 +2103,7 @@ class InfortrendiSCSICommonTestCase(InfortrendTestCase):
                                                 test_extraspecs)
         expect_cli_cmd = [
             mock.call('ShowLV'),
+            mock.call('ShowLV', 'tier'),
             mock.call('ShowLV', 'tier'),
             mock.call('ShowLV', 'tier'),
             mock.call('ShowLV', 'tier'),
