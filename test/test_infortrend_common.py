@@ -2135,8 +2135,6 @@ class InfortrendiSCSICommonTestCase(InfortrendTestCase):
             mock.call('ShowLV'),
             mock.call('ShowLV', 'tier'),
             mock.call('ShowLV', 'tier'),
-            mock.call('ShowLV', 'tier'),
-            mock.call('ShowLV', 'tier'),
             mock.call('CreatePartition',
                       test_pool_id,
                       test_volume['id'].replace('-', ''),
@@ -2149,7 +2147,7 @@ class InfortrendiSCSICommonTestCase(InfortrendTestCase):
     def test_create_partition_with_pool_wrong_tier_full(self, log_error):
         test_volume = self.cli_data.test_volume
         test_pool_id = self.cli_data.fake_lv_id[3]
-        test_extraspecs = {'infortrend:tiering': '2,3',
+        test_extraspecs = {'infortrend:tiering': '1,2',
                            'infortrend:provisioning': 'full'}
         configuration = copy.copy(self.configuration)
         configuration.infortrend_pools_name = 'LV-0, LV-1, LV-2, LV-3, LV-4'
