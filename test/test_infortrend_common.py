@@ -2158,7 +2158,7 @@ class InfortrendiSCSICommonTestCase(InfortrendTestCase):
         self._driver_setup(mock_commands, configuration, True)
 
         self.assertRaises(
-                exception.InfortrendCliException,
+                exception.VolumeDriverException,
                 self.driver._create_partition_with_pool,
                 test_volume,
                 test_pool_id,
