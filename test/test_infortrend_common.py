@@ -2112,7 +2112,7 @@ class InfortrendiSCSICommonTestCase(InfortrendTestCase):
                       test_volume['id'].replace('-', ''),
                       'size=%s' % (test_volume['size'] * 1024),
                       'tier=%s' % (
-                           test_extraspecs['infortrend:tiering'])),
+                          test_extraspecs['infortrend:tiering'])),
         ]
         self._assert_cli_has_calls(expect_cli_cmd)
 
