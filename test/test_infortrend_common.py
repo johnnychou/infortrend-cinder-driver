@@ -2085,7 +2085,7 @@ class InfortrendiSCSICommonTestCase(InfortrendTestCase):
 
     def test_create_partition_with_pool_settier_full(self):
         test_volume = self.cli_data.test_volume
-        test_pool_id = self.cli_data.fake_lv_id[2]
+        test_pool_id = self.cli_data.fake_lv_id[3]
         test_extraspecs = {'infortrend:tiering': '2',
                            'infortrend:provisioning': 'full'}
         configuration = copy.copy(self.configuration)

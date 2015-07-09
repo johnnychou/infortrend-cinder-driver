@@ -499,6 +499,7 @@ class InfortrendCommon(object):
             if provisioning == 'thin':
                 provisioning = int(volume_size * 0.2)
                 extraspecs_dict['provisioning'] = provisioning
+                print(provisioning)
                 extraspecs_dict['init'] = 'disable'
         # Tier Pool
         else:
