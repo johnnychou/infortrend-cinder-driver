@@ -538,15 +538,15 @@ class InfortrendCommon(object):
 
     def _check_tiering_existing(self, tier_levels, pool_id):
         rc, lv_info = self._execute('ShowLV', 'tier')
-
+        tier_levels_list = tier_levels[:]
         for entry in lv_info:
-            if entry['LV-ID'] == pool_id and entry['Tier'] in tier_levels:
-                tier_levels.remove(entry['Tier'])
-                if len(tier_levels) == 0:
+            if entry['LV-ID'] == pool_id and entry['Tier'] in tier_levels_list:
+                tier_levels_list.remove(entry['Tier'])
+                if len(tier_levels_list) == 0:
                     break
-        if len(tier_levels) != 0:
-            msg = _('Have not created %(tier_levels)s tier(s)') % {
-                'tier_levels': tier_levels}
+        if len(tier_levels_list) != 0:
+            msg = _('Have not created %(tier_levels_list)s tier(s)') % {
+                'tier_levels_list': tier_levels_list}
             LOG.error(msg)
             raise exception.VolumeDriverException(message=msg)
 
@@ -639,8 +639,6 @@ class InfortrendCommon(object):
                 tiering_set = extraspecs[self.TIERING_SET_KEY].lower()
                 tier_levels_list = tiering_set.split(',')
                 self._check_tiering_existing(tier_levels_list, pool_id)
-                print(tiering_set)
-                print(tier_levels_list)
                 if len(tier_levels_list) > 1:
                     msg = _('Must specify only one tier instead of '
                             '%(tier_levels_list)s tier(s)') % {
