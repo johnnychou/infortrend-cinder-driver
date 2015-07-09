@@ -2081,8 +2081,8 @@ class InfortrendiSCSICommonTestCase(InfortrendTestCase):
                       test_volume['id'].replace('-', ''),
                       'size=%s' % (test_volume['size'] * 1024),
                       'init=disable min=%sMB' % (
-                       int(test_volume['size'] * 1024 * 0.2))),
-            ]
+                          int(test_volume['size'] * 1024 * 0.2))),
+        ]
         self._assert_cli_has_calls(expect_cli_cmd)
 
     def test_create_partition_with_pool_settier_full(self):
@@ -2112,8 +2112,8 @@ class InfortrendiSCSICommonTestCase(InfortrendTestCase):
                       test_volume['id'].replace('-', ''),
                       'size=%s' % (test_volume['size'] * 1024),
                       'tier=%s' % (
-                       test_extraspecs['infortrend:tiering'])),
-            ]
+                           test_extraspecs['infortrend:tiering'])),
+        ]
         self._assert_cli_has_calls(expect_cli_cmd)
 
     def test_create_partition_with_pool_autotier_full(self):
@@ -2140,7 +2140,7 @@ class InfortrendiSCSICommonTestCase(InfortrendTestCase):
                       test_volume['id'].replace('-', ''),
                       'size=%s' % (test_volume['size'] * 1024),
                       'tier=0'),
-            ]
+        ]
         self._assert_cli_has_calls(expect_cli_cmd)
 
     def test_create_partition_with_pool_wrong_tier_full(self):
@@ -2158,11 +2158,11 @@ class InfortrendiSCSICommonTestCase(InfortrendTestCase):
         self._driver_setup(mock_commands, configuration, True)
 
         self.assertRaises(
-                exception.VolumeDriverException,
-                self.driver._create_partition_with_pool,
-                test_volume,
-                test_pool_id,
-                test_extraspecs)
+            exception.VolumeDriverException,
+            self.driver._create_partition_with_pool,
+            test_volume,
+            test_pool_id,
+            test_extraspecs)
 
     def test_create_partition_with_pool_settier_thin(self):
         test_volume = self.cli_data.test_volume
@@ -2190,8 +2190,8 @@ class InfortrendiSCSICommonTestCase(InfortrendTestCase):
                       test_volume['id'].replace('-', ''),
                       'size=%s' % (test_volume['size'] * 1024),
                       'init=disable tier=%s min=0MB' % (
-                       test_extraspecs['infortrend:tiering'])),
-            ]
+                          test_extraspecs['infortrend:tiering'])),
+        ]
         self._assert_cli_has_calls(expect_cli_cmd)
 
     def test_create_partition_with_pool_autotier_thin(self):
@@ -2220,5 +2220,5 @@ class InfortrendiSCSICommonTestCase(InfortrendTestCase):
                       test_volume['id'].replace('-', ''),
                       'size=%s' % (test_volume['size'] * 1024),
                       'init=disable min=0MB'),
-            ]
+        ]
         self._assert_cli_has_calls(expect_cli_cmd)
