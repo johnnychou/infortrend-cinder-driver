@@ -2162,5 +2162,37 @@ class InfortrendiSCSICommonTestCase(InfortrendTestCase):
                                                 test_extraspecs)
         self.assertEqual(1, log_error.call_count)
 
-    def test_create_partition_with_pool_tier_thin(self):
+    def test_create_partition_with_pool_settier_thin(self):
+        test_volume = self.cli_data.test_volume
+        test_pool_id = self.cli_data.fake_lv_id[3]
+        test_extraspecs = {'infortrend:tiering': '0,2',
+                           'infortrend:provisioning': 'thin'}
+        configuration = copy.copy(self.configuration)
+        configuration.infortrend_pools_name = 'LV-0, LV-1, LV-2, LV-3, LV-4'
+        mock_commands = {
+            'CreatePartition': SUCCEED,
+            'ShowLV': self._mock_show_lv_for_do_setup,
+        }
+
+        self._driver_setup(mock_commands, configuration, True)
+        self.driver._create_partition_with_pool(test_volume,
+                                                test_pool_id,
+                                                test_extraspecs)
+        expect_cli_cmd = [
+            mock.call('ShowLV'),
+            mock.call('ShowLV', 'tier'),
+            mock.call('ShowLV', 'tier'),
+            mock.call('ShowLV', 'tier'),
+            mock.call('ShowLV', 'tier'),
+            mock.call('CreatePartition',
+                      test_pool_id,
+                      test_volume['id'].replace('-', ''),
+                      'size=%s' % (test_volume['size'] * 1024),
+                      'init=disable min=0MB',
+                      'tier=%s' % (
+                       test_extraspecs['infortrend:tiering'])),
+            ]
+        self._assert_cli_has_calls(expect_cli_cmd)
+
+    def test_create_partition_with_pool_autotier_thin(self):
         pass

@@ -639,6 +639,7 @@ class InfortrendCommon(object):
                 tiering_set = extraspecs[self.TIERING_SET_KEY].lower()
                 tier_levels_list = tiering_set.split(',')
                 self._check_tiering_existing(tier_levels_list, pool_id)
+                print(tiering_set)
                 print(tier_levels_list)
                 if len(tier_levels_list) > 1:
                     msg = _('Must specify only one tier instead of '
