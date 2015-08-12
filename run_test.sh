@@ -20,8 +20,9 @@ cp ./test/* $CINDER_DIR/$CINDER_TEST_DIR/ -r
 
 cd $CINDER_DIR
 
-./run_tests.sh -V test_infortrend_cli
-./run_tests.sh test_infortrend_common
-./run_tests.sh -p
+tox -v -epy34 -- cinder.tests.unit.InfortrendCLITestCase.test_cli_all_command_execute
+tox -v -epy34 -- cinder.tests.unit.InfortrendCLITestCase
+
+./run_tests.sh -p -N
 
 cd ..
